@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SwipeFollow : MonoBehaviour
 {
@@ -58,7 +59,7 @@ public class SwipeFollow : MonoBehaviour
 
         var normalizedSwipe = swipeDistance / Screen.height;
         _swipeForce = Mathf.Clamp(Mathf.RoundToInt(normalizedSwipe * 10), 0, 10);
-        
+
         swipeForceText.text = $"Swipe force: {_swipeForce}";
 
         if (_swipeForce >= WinThresholdMin && _swipeForce <= WinThresholdMax)
@@ -77,5 +78,14 @@ public class SwipeFollow : MonoBehaviour
     {
         _gameEnded = true;
         resultText.text = success ? "You won!" : "You lost!";
+    }
+
+    public void RestartGame()
+    {
+        _gameEnded = false;
+        _swiped = false;
+        resultText.text = "";
+        swipeForceText.text = "";
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
