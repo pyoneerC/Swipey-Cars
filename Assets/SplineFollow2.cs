@@ -157,7 +157,7 @@ public class SwipeFollow2 : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        SceneManager.LoadScene("LVL2");
+        SceneManager.LoadScene("LVL1");
     }
 
     public void ShowInterstitialAd()
@@ -175,9 +175,9 @@ public class SwipeFollow2 : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void QuitGame()
+    public void RedirectToShop()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Shop");
     }
 
     public void TogglePause()

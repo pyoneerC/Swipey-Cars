@@ -175,9 +175,9 @@ public class SwipeFollow : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void QuitGame()
+    public void RedirectToShop()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Shop");
     }
 
     public void TogglePause()
