@@ -141,10 +141,23 @@ public class SwipeFollow2 : MonoBehaviour
                 _ => endTextHint.text
             };
 
-        if (!success)
+        switch (success)
         {
-            Invoke(nameof(ShowInterstitialAd), 1.0f);
+            case false:
+                if (UnityEngine.Random.Range(0, 2) == 0)
+                {
+                    Invoke(nameof(ShowInterstitialAd), 1.0f);
+                }
+                break;
+            case true:
+                Invoke(nameof(GoToNextLevel), 2.0f);
+                break;
         }
+    }
+
+    public void GoToNextLevel()
+    {
+        SceneManager.LoadScene("LVL2");
     }
 
     public void ShowInterstitialAd()
@@ -158,8 +171,7 @@ public class SwipeFollow2 : MonoBehaviour
         _swiped = false;
         resultText.text = "";
         swipeForceText.text = "";
-        //show reward ad
-        FindObjectOfType<RewardedAdsButton>().ShowAd();
+        //FindObjectOfType<RewardedAdsButton>().ShowAd();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
