@@ -160,6 +160,7 @@ public class SwipeFollow : MonoBehaviour
         swipeForceText.text = "";
         //show reward ad
         FindObjectOfType<RewardedAdsButton>().ShowAd();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitGame()

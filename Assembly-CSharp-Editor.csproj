@@ -41,6 +41,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Assets\LevelPlay\Editor\LevelPlayVersions.json" />
+    <None Include="Assets\LevelPlay\Editor\IronSourceSDKDependencies.xml" />
     <None Include="Assets\MobileDependencyResolver\Editor\mobile-dependency-resolver.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\unidad\2022.3.50f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
