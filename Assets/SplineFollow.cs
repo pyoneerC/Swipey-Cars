@@ -3,12 +3,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
+using UnityEngine.UI;
 
 public class SwipeFollow : MonoBehaviour
 {
     public TextMeshProUGUI resultText;
     public TextMeshProUGUI swipeForceText;
     public TextMeshProUGUI endTextHint;
+    public GameObject pauseButton;
+    public Texture2D pauseButtonImageA;
+    public Texture2D pauseButtonImageB;
 
     public Transform carTransform; // The car object
     public SplineContainer spline; // Your spline path, assuming you have a spline component
@@ -23,6 +27,12 @@ public class SwipeFollow : MonoBehaviour
     private const int WinThresholdMin = 3;
     private const int WinThresholdMax = 5;
     private bool _gameEnded;
+
+    private void Start()
+    {
+        Time.timeScale = 1;
+        pauseButton.SetActive(true);
+    }
 
     private void Update()
     {
@@ -150,4 +160,19 @@ public class SwipeFollow : MonoBehaviour
         swipeForceText.text = "";
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void TogglePause()
+    {
+        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+
+        var rawImage = pauseButton.GetComponent<RawImage>();
+
+        rawImage.texture = Time.timeScale == 0 ? pauseButtonImageB : pauseButtonImageA;
+    }
+
 }
