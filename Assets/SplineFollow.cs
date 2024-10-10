@@ -2,11 +2,16 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Splines;
 
 public class SwipeFollow : MonoBehaviour
 {
     public TextMeshProUGUI resultText;
     public TextMeshProUGUI swipeForceText;
+    public TextMeshProUGUI endTextHint;
+
+    public Transform carTransform; // The car object
+    public SplineContainer spline; // Your spline path, assuming you have a spline component
 
     private int _swipeForce;
     private bool _swiped;
@@ -62,14 +67,7 @@ public class SwipeFollow : MonoBehaviour
 
         swipeForceText.text = $"Swipe force: {_swipeForce}";
 
-        if (_swipeForce >= WinThresholdMin && _swipeForce <= WinThresholdMax)
-        {
-            EndGame(true);
-        }
-        else
-        {
-            EndGame(false);
-        }
+        EndGame(_swipeForce is >= WinThresholdMin and <= WinThresholdMax);
 
         _swiped = true;
     }
@@ -77,7 +75,61 @@ public class SwipeFollow : MonoBehaviour
     private void EndGame(bool success)
     {
         _gameEnded = true;
-        resultText.text = success ? "You won!" : "You lost!";
+        if (success)
+        {
+            MoveCarToEnd();
+        }
+        else
+        {
+            MoveCarToRandomLocation();
+        }
+    }
+
+    private void MoveCarToEnd()
+    {
+        StartCoroutine(MoveCarOnSpline(1.0f, true));
+    }
+
+    private void MoveCarToRandomLocation()
+    {
+        var randomPosition = UnityEngine.Random.Range(0.1f, 0.9f);
+        StartCoroutine(MoveCarOnSpline(randomPosition, false));
+    }
+
+    private System.Collections.IEnumerator MoveCarOnSpline(float targetPosition, bool success)
+    {
+        var currentTime = 0f;
+        const float startPosition = 0f;
+        var duration = UnityEngine.Random.Range(2f, 4f);
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            var t = currentTime / duration;
+            var newPosition = Mathf.Lerp(startPosition, targetPosition, t);
+
+            carTransform.position = spline.EvaluatePosition(newPosition);
+
+            carTransform.rotation = Quaternion.LookRotation(spline.EvaluateTangent(newPosition));
+            carTransform.rotation *= Quaternion.Euler(0, 180, 0);
+
+            yield return null;
+        }
+
+        resultText.text = success ? "You win!" : "You lost!";
+        resultText.color = success ? Color.green : Color.red;
+
+        if (success)
+        {
+            endTextHint.text = "Nice!";
+        }
+        else
+            endTextHint.text = _swipeForce switch
+            {
+                < WinThresholdMin => "Too slow!",
+                > WinThresholdMax => "Too fast!",
+                _ => endTextHint.text
+            };
     }
 
     public void RestartGame()
