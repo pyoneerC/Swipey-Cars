@@ -1,0 +1,39 @@
+﻿name: Build Unity Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.0
+
+      - name: Discard uncommitted changes
+        run: |
+          git reset --hard
+          git clean -fd
+
+      - name: Build Unity Project for Android
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: Android
+          buildName: SwipeyCars
+          buildsPath: ./build
+
+      - name: Upload to Butler
+        uses: yeslayla/butler-publish-itchio-action@v1.0.3
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: android
+          ITCH_GAME: swipeycars
+          ITCH_USER: pyoneerc1
+          PACKAGE: ./build/SwipeyCars.apk
