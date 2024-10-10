@@ -130,6 +130,16 @@ public class SwipeFollow : MonoBehaviour
                 > WinThresholdMax => "Too fast!",
                 _ => endTextHint.text
             };
+
+        if (!success)
+        {
+            Invoke(nameof(ShowInterstitialAd), 1.0f);
+        }
+    }
+
+    public void ShowInterstitialAd()
+    {
+        FindObjectOfType<InterstitialAdExample>().ShowAd();
     }
 
     public void RestartGame()

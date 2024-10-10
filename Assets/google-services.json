@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "430088205428",
+    "project_id": "swiping-car",
+    "storage_bucket": "swiping-car.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430088205428:android:434301cf1d68b80a6b8d21",
+        "android_client_info": {
+          "package_name": "com.maxcompe.swipingcar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtdjlcNflSn5OMtEjc-7iA1ypruOL40Lw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
