@@ -48,6 +48,7 @@
     <Compile Include="Assets\SplineFollow2.cs" />
     <Compile Include="Assets\SplineFollow.cs" />
     <Compile Include="Assets\UserStats.cs" />
+    <Compile Include="Assets\SplineFollow3.cs" />
     <Compile Include="Assets\Ads Scripts\AdsInitializer.cs" />
     <Compile Include="Assets\Ads Scripts\RewardedAd.cs" />
     <Compile Include="Assets\Ads Scripts\InterstitialAd.cs" />

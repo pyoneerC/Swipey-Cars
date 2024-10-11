@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 using UnityEngine.UI;
 
-public class SwipeFollow2 : MonoBehaviour
+public class SwipeFollow3 : MonoBehaviour
 {
     public TextMeshProUGUI resultText;
     public TextMeshProUGUI swipeForceText;
@@ -24,8 +24,8 @@ public class SwipeFollow2 : MonoBehaviour
     private Vector2 _swipeEnd;
     private bool _swipeDetected = false;
     private float _maxSwipeForce = 1.0f;
-    private const int WinThresholdMin = 1;
-    private const int WinThresholdMax = 2;
+    private const int WinThresholdMin = 8;
+    private const int WinThresholdMax = 9;
     private bool _gameEnded;
 
     private void Start()
@@ -116,7 +116,7 @@ public class SwipeFollow2 : MonoBehaviour
     {
         var currentTime = 0f;
         const float startPosition = 0f;
-        var duration = UnityEngine.Random.Range(2f, 4f);
+        var duration = UnityEngine.Random.Range(10f, 20f);
 
         while (currentTime < duration)
         {
@@ -163,7 +163,7 @@ public class SwipeFollow2 : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        SceneManager.LoadScene("LVL3");
+        SceneManager.LoadScene("LVL1");
     }
 
     public void ShowInterstitialAd()
