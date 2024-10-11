@@ -1,6 +1,6 @@
 ﻿# Swipey Cars
 
-**Swipey Cars** is an exciting hyper-casual game designed for Android where the player's swiping precision determines success. The objective is simple: swipe the screen to guide a car from point A to point B, but there's a catch—swipe too hard or too softly, and you lose. The challenge lies in finding that perfect balance for smooth driving.
+**Swipey Cars** is an open source hyper-casual game designed for Android where the player's swiping precision determines success. The objective is simple: swipe the screen to guide a car from point A to point B, but there's a catch—swipe too hard or too softly, and you lose. The challenge lies in finding that perfect balance for smooth driving.
 
 ## Project Overview
 
