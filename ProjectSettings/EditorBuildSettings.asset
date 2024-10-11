@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LVL4.unity
     guid: 20ffbee13ffd6ce428b678655d6185e9
   - enabled: 1
-    path: Assets/Scenes/Shop.unity
+    path: Assets/Scenes/Mshop.unity
     guid: 57ac7aaff8436ad4ba4d568adbd3acfc
   - enabled: 1
     path: Assets/Scenes/LVL2.unity
