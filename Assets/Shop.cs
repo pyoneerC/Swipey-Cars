@@ -1,11 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BackToLvl1 : MonoBehaviour
+public class ShopCode : MonoBehaviour
 {
     public void BackToLevel1()
     {
         SceneManager.LoadScene("LVL1");
+    }
+
+    public void ShowRewardedAd()
+    {
+        FindObjectOfType<RewardedAdsButton>().ShowAd();
     }
 
 }
