@@ -1,16 +1,26 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ShopCode : MonoBehaviour
+public class UILogic : MonoBehaviour
 {
-    public void BackToLevel1()
+    public void GoToFirstLevel()
     {
         SceneManager.LoadScene("LVL1");
     }
 
-    public void ShowRewardedAd()
+    public void GoToShop()
     {
-        FindObjectOfType<RewardedAdsButton>().ShowAd();
+        SceneManager.LoadScene("Shop");
+    }
+
+    public void GoToInventory()
+    {
+        SceneManager.LoadScene("Inventory");
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 
 }

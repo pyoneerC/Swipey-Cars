@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/LVL2.unity
     guid: cc3a2a37d55c495488e3ae6ccc8faf00
+  - enabled: 1
+    path: Assets/Scenes/UI/Inventory.unity
+    guid: 0924101ca0c18cf4d87cf0d0cd76ea64
+  - enabled: 1
+    path: Assets/Scenes/UI/Main Menu.unity
+    guid: 8d51474813732294f89c67d69293151b
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: a069d947e861ce147a5ce0dd800490c2,
       type: 2}
