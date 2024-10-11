@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 using UnityEngine.UI;
@@ -30,6 +31,7 @@ public class SwipeFollow : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(spline.gameObject);
         Time.timeScale = 1;
         pauseButton.SetActive(true);
     }
@@ -45,7 +47,7 @@ public class SwipeFollow : MonoBehaviour
 
     private void DetectSwipe()
     {
-        if (Input.touchCount <= 0) return;
+        if (Input.touchCount <= 0 || EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return;
         var touch = Input.GetTouch(0);
         switch (touch.phase)
         {
@@ -71,6 +73,14 @@ public class SwipeFollow : MonoBehaviour
     {
         var swipeDelta = _swipeEnd - _swipeStart;
         var swipeDistance = swipeDelta.magnitude;
+
+        float minSwipeDistance = 1.0f;
+
+        if (swipeDistance < minSwipeDistance)
+        {
+            Debug.Log("Swipe distance too short");
+            return;
+        }
 
         var normalizedSwipe = swipeDistance / Screen.height;
         _swipeForce = Mathf.Clamp(Mathf.RoundToInt(normalizedSwipe * 10), 0, 10);
@@ -171,7 +181,7 @@ public class SwipeFollow : MonoBehaviour
         _swiped = false;
         resultText.text = "";
         swipeForceText.text = "";
-        //FindObjectOfType<RewardedAdsButton>().ShowAd();
+        FindObjectOfType<RewardedAdsButton>().ShowAd();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
