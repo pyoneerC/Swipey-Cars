@@ -31,7 +31,6 @@ public class SwipeFollow : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(spline.gameObject);
         Time.timeScale = 1;
         pauseButton.SetActive(true);
     }
@@ -74,18 +73,16 @@ public class SwipeFollow : MonoBehaviour
         var swipeDelta = _swipeEnd - _swipeStart;
         var swipeDistance = swipeDelta.magnitude;
 
-        float minSwipeDistance = 1.0f;
-
-        if (swipeDistance < minSwipeDistance)
-        {
-            Debug.Log("Swipe distance too short");
-            return;
-        }
-
         var normalizedSwipe = swipeDistance / Screen.height;
         _swipeForce = Mathf.Clamp(Mathf.RoundToInt(normalizedSwipe * 10), 0, 10);
 
-        swipeForceText.text = $"Swipe force: {_swipeForce}";
+        swipeForceText.text = _swipeForce <= 0 ? "Swipe faster!" : $"Swipe force: {_swipeForce}";
+        swipeForceText.color = _swipeForce <= 0 ? Color.red : Color.black;
+
+        if (_swipeForce <= 0)
+        {
+            return;
+        }
 
         EndGame(_swipeForce is >= WinThresholdMin and <= WinThresholdMax);
 
@@ -182,6 +179,12 @@ public class SwipeFollow : MonoBehaviour
         resultText.text = "";
         swipeForceText.text = "";
         FindObjectOfType<RewardedAdsButton>().ShowAd();
+
+        Invoke(nameof(RestartLevel), 2.0f);
+    }
+
+    public void RestartLevel()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

@@ -75,7 +75,13 @@ public class SwipeFollow2 : MonoBehaviour
         var normalizedSwipe = swipeDistance / Screen.height;
         _swipeForce = Mathf.Clamp(Mathf.RoundToInt(normalizedSwipe * 10), 0, 10);
 
-        swipeForceText.text = $"Swipe force: {_swipeForce}";
+        swipeForceText.text = _swipeForce <= 0 ? "Swipe faster!" : $"Swipe force: {_swipeForce}";
+        swipeForceText.color = _swipeForce <= 0 ? Color.red : Color.black;
+
+        if (_swipeForce <= 0)
+        {
+            return;
+        }
 
         EndGame(_swipeForce is >= WinThresholdMin and <= WinThresholdMax);
 
@@ -171,7 +177,13 @@ public class SwipeFollow2 : MonoBehaviour
         _swiped = false;
         resultText.text = "";
         swipeForceText.text = "";
-        //FindObjectOfType<RewardedAdsButton>().ShowAd();
+        FindObjectOfType<RewardedAdsButton>().ShowAd();
+
+        Invoke(nameof(RestartLevel), 2.0f);
+    }
+
+    public void RestartLevel()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
