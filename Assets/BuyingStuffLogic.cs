@@ -1,36 +1,61 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class BuyingStuffLogic : MonoBehaviour
 {
-    public TextMeshProUGUI statusText; // Reference to the TextMeshPro component
+    public TextMeshProUGUI statusText;
 
     private int _coins;
     private int _carsUnlocked;
 
-    // Prices for each car
     private const int PurpleCarPrice = 420;
     private const int TruckPrice = 999;
     private const int GreenCarPrice = 4200;
     private const int RaceCarProPrice = 6969;
 
-    // Enum for car types
     public enum CarType
     {
+        StartingCar,
         PurpleCar1,
         Truck,
         GreenCar,
         RaceCarPro
     }
 
-    // Set my coins to 10000 for debugging purposes
     private void Start()
     {
         PlayerPrefs.SetInt("Coins", 10000);
-        PlayerPrefs.SetInt("VehicleMap", 1); // Ensure vehicle map is initialized
+        PlayerPrefs.SetInt("VehicleMap", 1);
         PlayerPrefs.Save();
+        _coins = PlayerPrefs.GetInt("Coins");
+        _carsUnlocked = PlayerPrefs.GetInt("VehicleMap");
+    }
+
+    public void Add100Coins() => AddCoins(100);
+    public void Add300Coins() => AddCoins(300);
+    public void Add1000Coins() => AddCoins(1000);
+    public void Add2500Coins() => AddCoins(2500);
+    public void Add5000Coins() => AddCoins(5000);
+    public void AddRandomBoxCoins() => AddCoins(GenerateRandomBoxAmount());
+
+    private void AddCoins(int amount)
+    {
+        _coins = PlayerPrefs.GetInt("Coins");
+        _coins += amount;
+        SavePlayerData(_coins, _carsUnlocked);
+        UpdateStatusText($"Added {amount} coins!", Color.green);
+    }
+
+    private int GenerateRandomBoxAmount()
+    {
+        float randomValue = Random.Range(0f, 1f);
+        if (randomValue < 0.6f)
+            return Random.Range(5, 15);
+        else if (randomValue < 0.9f)
+            return Random.Range(15, 50);
+        else
+            return Random.Range(50, 101);
     }
 
     public void PurchasePurpleCar1()
@@ -60,32 +85,28 @@ public class BuyingStuffLogic : MonoBehaviour
 
         int carPrice = GetCarPrice(carType);
 
-        // Check if the player already owns the car
         if (IsCarOwned(carType))
         {
             UpdateStatusText($"You already own the {carType}.", Color.red);
-            return; // Exit the function if car is already owned
+            return;
         }
 
-        // Check if the player has enough coins
         if (_coins < carPrice)
         {
             UpdateStatusText($"Not enough coins to purchase the {carType}.", Color.red);
-            return; // Not enough coins
+            return;
         }
 
-        // Proceed with the purchase
         _coins -= carPrice;
-        _carsUnlocked = (int)carType + 1;  // Set the car unlocked state (assuming each car corresponds to a unique int value)
+        _carsUnlocked |= (1 << (int)carType);
         SavePlayerData(_coins, _carsUnlocked);
 
-        UpdateStatusText($"Purchased {carType} successfully!", Color.green); // Success message in green
+        UpdateStatusText($"Purchased {carType} successfully!", Color.green);
     }
 
     private bool IsCarOwned(CarType carType)
     {
-        // Check if the car is already unlocked
-        return _carsUnlocked >= (int)carType + 1; // Check if the current unlocked state includes this car
+        return (_carsUnlocked & (1 << (int)carType)) != 0;
     }
 
     private int GetCarPrice(CarType carType)
@@ -102,7 +123,7 @@ public class BuyingStuffLogic : MonoBehaviour
                 return RaceCarProPrice;
             default:
                 UpdateStatusText("Invalid car type.", Color.red);
-                return 0; // Default price if the car type is invalid
+                return 0;
         }
     }
 
@@ -111,8 +132,6 @@ public class BuyingStuffLogic : MonoBehaviour
         PlayerPrefs.SetInt("Coins", coins);
         PlayerPrefs.SetInt("VehicleMap", carsUnlocked);
         PlayerPrefs.Save();
-
-        UpdateStatusText($"Coins: {coins}, Cars Unlocked: {carsUnlocked}", Color.white);
     }
 
     private void UpdateStatusText(string message, Color color)

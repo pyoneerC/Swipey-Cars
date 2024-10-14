@@ -231,7 +231,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 36097721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: Add300Coins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &36097723
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -493,7 +505,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 210639613}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: AddRandomBoxCoins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &210639615
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -952,7 +976,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 293994672}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: Add100Coins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &293994674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1580,7 +1616,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520297755}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: Add1000Coins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &520297757
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2493,7 +2541,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 772100943}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: Add2500Coins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &772100945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2974,7 +3034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921657e08b3ff5f4a87c7c2bdd008609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusText: {fileID: 0}
+  statusText: {fileID: 1465729512}
 --- !u!1 &1090587392
 GameObject:
   m_ObjectHideFlags: 0
@@ -5098,7 +5158,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1566294238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: Add5000Coins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1566294240
 CanvasRenderer:
   m_ObjectHideFlags: 0
