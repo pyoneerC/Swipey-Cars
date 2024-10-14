@@ -34,6 +34,10 @@ public class SwipeFollow2 : MonoBehaviour
     private int _carsUnlocked;
     private int _levelsbeaten;
 
+    public GameObject muteButton;
+    public Texture2D muteButtonImageA;
+    public Texture2D muteButtonImageB;
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -225,6 +229,15 @@ public class SwipeFollow2 : MonoBehaviour
         var rawImage = pauseButton.GetComponent<RawImage>();
 
         rawImage.texture = Time.timeScale == 0 ? pauseButtonImageB : pauseButtonImageA;
+    }
+
+    public void ToggleMute()
+    {
+        Camera.main.GetComponent<AudioListener>().enabled = !Camera.main.GetComponent<AudioListener>().enabled;
+
+        var rawImage = muteButton.GetComponent<RawImage>();
+
+        rawImage.texture = Camera.main.GetComponent<AudioListener>().enabled ? muteButtonImageA : muteButtonImageB;
     }
 
 }
