@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BuyingStuffLogic : MonoBehaviour
 {
+    public TextMeshProUGUI statusText; // Reference to the TextMeshPro component
+
     private int _coins;
     private int _carsUnlocked;
 
@@ -60,16 +63,14 @@ public class BuyingStuffLogic : MonoBehaviour
         // Check if the player already owns the car
         if (IsCarOwned(carType))
         {
-            Debug.Log($"You already own the {carType}."); // Log message for already owned car
+            UpdateStatusText($"You already own the {carType}.", Color.red);
             return; // Exit the function if car is already owned
         }
-
-        Debug.Log($"Attempting to purchase {carType}. Coins: {_coins}, Price: {carPrice}");
 
         // Check if the player has enough coins
         if (_coins < carPrice)
         {
-            Debug.Log($"Not enough coins to purchase the {carType}.");
+            UpdateStatusText($"Not enough coins to purchase the {carType}.", Color.red);
             return; // Not enough coins
         }
 
@@ -77,7 +78,8 @@ public class BuyingStuffLogic : MonoBehaviour
         _coins -= carPrice;
         _carsUnlocked = (int)carType + 1;  // Set the car unlocked state (assuming each car corresponds to a unique int value)
         SavePlayerData(_coins, _carsUnlocked);
-        Debug.Log($"Purchased {carType} successfully."); // Log successful purchase
+
+        UpdateStatusText($"Purchased {carType} successfully!", Color.green); // Success message in green
     }
 
     private bool IsCarOwned(CarType carType)
@@ -99,7 +101,7 @@ public class BuyingStuffLogic : MonoBehaviour
             case CarType.RaceCarPro:
                 return RaceCarProPrice;
             default:
-                Debug.LogError("Invalid car type.");
+                UpdateStatusText("Invalid car type.", Color.red);
                 return 0; // Default price if the car type is invalid
         }
     }
@@ -110,7 +112,12 @@ public class BuyingStuffLogic : MonoBehaviour
         PlayerPrefs.SetInt("VehicleMap", carsUnlocked);
         PlayerPrefs.Save();
 
-        // Debug the saved values
-        Debug.Log($"Saved Coins: {coins}, Cars Unlocked: {carsUnlocked}");
+        UpdateStatusText($"Coins: {coins}, Cars Unlocked: {carsUnlocked}", Color.white);
+    }
+
+    private void UpdateStatusText(string message, Color color)
+    {
+        statusText.text = message;
+        statusText.color = color;
     }
 }
