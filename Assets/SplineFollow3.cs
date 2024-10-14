@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 using UnityEngine.UI;
@@ -13,6 +14,9 @@ public class SwipeFollow3 : MonoBehaviour
     public GameObject pauseButton;
     public Texture2D pauseButtonImageA;
     public Texture2D pauseButtonImageB;
+    public GameObject muteButton;
+    public Texture2D muteButtonImageA;
+    public Texture2D muteButtonImageB;
 
     public Transform carTransform; // The car object
     public SplineContainer spline; // Your spline path, assuming you have a spline component
@@ -50,6 +54,7 @@ public class SwipeFollow3 : MonoBehaviour
             _coins = PlayerPrefs.GetInt("Coins");
             coinsText.text = _coins.ToString();
         }
+
         if (_gameEnded) return;
         if (!_swiped)
         {
@@ -59,7 +64,7 @@ public class SwipeFollow3 : MonoBehaviour
 
     private void DetectSwipe()
     {
-        if (Input.touchCount <= 0) return;
+        if (Input.touchCount <= 0 || EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return;
         var touch = Input.GetTouch(0);
         switch (touch.phase)
         {
@@ -222,6 +227,15 @@ public class SwipeFollow3 : MonoBehaviour
         var rawImage = pauseButton.GetComponent<RawImage>();
 
         rawImage.texture = Time.timeScale == 0 ? pauseButtonImageB : pauseButtonImageA;
+    }
+
+    public void ToggleMute()
+    {
+        Camera.main.GetComponent<AudioListener>().enabled = !Camera.main.GetComponent<AudioListener>().enabled;
+
+        var rawImage = muteButton.GetComponent<RawImage>();
+
+        rawImage.texture = Camera.main.GetComponent<AudioListener>().enabled ? muteButtonImageA : muteButtonImageB;
     }
 
 }
