@@ -16,6 +16,7 @@ public class SwipeFollow3 : MonoBehaviour
 
     public Transform carTransform; // The car object
     public SplineContainer spline; // Your spline path, assuming you have a spline component
+    public TextMeshProUGUI coinsText;
 
     private int _swipeForce;
     private bool _swiped;
@@ -37,10 +38,16 @@ public class SwipeFollow3 : MonoBehaviour
         pauseButton.SetActive(true);
         _coins = PlayerPrefs.GetInt("Coins");
         _carsUnlocked = PlayerPrefs.GetInt("VehicleMap");
+        coinsText.text = _coins.ToString();
     }
 
     private void Update()
     {
+        if (_coins != PlayerPrefs.GetInt("Coins"))
+        {
+            _coins = PlayerPrefs.GetInt("Coins");
+            coinsText.text = _coins.ToString();
+        }
         if (_gameEnded) return;
         if (!_swiped)
         {

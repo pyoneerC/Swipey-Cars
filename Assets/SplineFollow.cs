@@ -48,7 +48,7 @@ public class SwipeFollow : MonoBehaviour
             _coins = PlayerPrefs.GetInt("Coins");
             coinsText.text = _coins.ToString();
         }
-        
+
         if (_gameEnded) return;
         if (!_swiped)
         {
