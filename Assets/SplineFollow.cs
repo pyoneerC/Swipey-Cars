@@ -28,11 +28,15 @@ public class SwipeFollow : MonoBehaviour
     private const int WinThresholdMin = 3;
     private const int WinThresholdMax = 5;
     private bool _gameEnded;
+    private int _coins;
+    private int _carsUnlocked;
 
     private void Start()
     {
         Time.timeScale = 1;
         pauseButton.SetActive(true);
+        _coins = PlayerPrefs.GetInt("Coins");
+        _carsUnlocked = PlayerPrefs.GetInt("VehicleMap");
     }
 
     private void Update()
@@ -157,6 +161,9 @@ public class SwipeFollow : MonoBehaviour
                 }
                 break;
             case true:
+                _coins += UnityEngine.Random.Range(10, 20);
+                PlayerPrefs.SetInt("Coins", _coins);
+                PlayerPrefs.Save();
                 Invoke(nameof(GoToNextLevel), 2.0f);
                 break;
         }
