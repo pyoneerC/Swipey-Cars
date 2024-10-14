@@ -1,10 +1,10 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class SwipeFollow2 : MonoBehaviour
 {
@@ -14,6 +14,9 @@ public class SwipeFollow2 : MonoBehaviour
     public GameObject pauseButton;
     public Texture2D pauseButtonImageA;
     public Texture2D pauseButtonImageB;
+    public GameObject muteButton;
+    public Texture2D muteButtonImageA;
+    public Texture2D muteButtonImageB;
 
     public Transform carTransform; // The car object
     public SplineContainer spline; // Your spline path, assuming you have a spline component
@@ -33,10 +36,6 @@ public class SwipeFollow2 : MonoBehaviour
     private int _coins;
     private int _carsUnlocked;
     private int _levelsbeaten;
-
-    public GameObject muteButton;
-    public Texture2D muteButtonImageA;
-    public Texture2D muteButtonImageB;
 
     private void Start()
     {
@@ -65,7 +64,7 @@ public class SwipeFollow2 : MonoBehaviour
 
     private void DetectSwipe()
     {
-        if (Input.touchCount <= 0) return;
+        if (Input.touchCount <= 0 || EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return;
         var touch = Input.GetTouch(0);
         switch (touch.phase)
         {
@@ -170,13 +169,13 @@ public class SwipeFollow2 : MonoBehaviour
         switch (success)
         {
             case false:
-                if (Random.Range(0, 2) == 0)
+                if (UnityEngine.Random.Range(0, 2) == 0)
                 {
                     Invoke(nameof(ShowInterstitialAd), 1.0f);
                 }
                 break;
             case true:
-                _coins += Random.Range(10, 20);
+                _coins += UnityEngine.Random.Range(10, 20);
                 PlayerPrefs.SetInt("Coins", _coins);
                 _levelsbeaten++;
                 PlayerPrefs.SetInt("LevelsBeaten", _levelsbeaten);
