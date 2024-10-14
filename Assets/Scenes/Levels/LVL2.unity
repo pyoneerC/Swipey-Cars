@@ -3045,12 +3045,12 @@ MonoBehaviour:
   pauseButton: {fileID: 2105868291}
   pauseButtonImageA: {fileID: 2800000, guid: a9d0b6716ccf4664f8bccbb7928f3633, type: 3}
   pauseButtonImageB: {fileID: 2800000, guid: 91eb640a7bfea5e4c95358e8e954600d, type: 3}
-  carTransform: {fileID: 885723820}
-  spline: {fileID: 937863233}
-  coinsText: {fileID: 1207323322}
   muteButton: {fileID: 100666625}
   muteButtonImageA: {fileID: 2800000, guid: c84cdccad4a2c1b4c86a0431e3f2128e, type: 3}
   muteButtonImageB: {fileID: 2800000, guid: b22edce2f37f13944a1685baab2593b8, type: 3}
+  carTransform: {fileID: 885723820}
+  spline: {fileID: 937863233}
+  coinsText: {fileID: 1207323322}
 --- !u!4 &917549985 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38d6e48e5baa36a46b41ba0dfaa4f8bf,
@@ -5196,7 +5196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905a811e394c1ff478d0b8e7ba258ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showAdButton: {fileID: 0}
+  _showAdButton: {fileID: 2079027837}
   _androidAdUnitId: Rewarded_Android
   _iOSAdUnitId: Rewarded_iOS
 --- !u!114 &1482078291
