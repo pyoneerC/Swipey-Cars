@@ -163,7 +163,11 @@ public class SwipeFollow3 : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        SceneManager.LoadScene("LVL4");
+        string[] validScenes = { "LVL1", "LVL2", "LVL4" };
+
+        var randomIndex = UnityEngine.Random.Range(0, validScenes.Length);
+
+        SceneManager.LoadScene(validScenes[randomIndex]);
     }
 
     public void ShowInterstitialAd()
