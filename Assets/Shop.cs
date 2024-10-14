@@ -11,10 +11,30 @@ public class UILogic : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI vehicleText;
 
+    private int _coins;
+    private int _carsUnlocked;
+
     private void Start()
     {
         InitializePlayerPrefs();
         UpdateCoinsDisplay();
+        UpdateVehicleDisplay();
+
+        _coins = PlayerPrefs.GetInt(CoinsKey);
+        _carsUnlocked = PlayerPrefs.GetInt(VehicleMapKey);
+    }
+
+    //update coins text and vehicle text if changed
+    private void Update()
+    {
+        if (_coins != PlayerPrefs.GetInt(CoinsKey))
+        {
+            _coins = PlayerPrefs.GetInt(CoinsKey);
+            UpdateCoinsDisplay();
+        }
+
+        if (_carsUnlocked == PlayerPrefs.GetInt(VehicleMapKey)) return;
+        _carsUnlocked = PlayerPrefs.GetInt(VehicleMapKey);
         UpdateVehicleDisplay();
     }
 

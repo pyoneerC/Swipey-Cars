@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 220675721}
   - component: {fileID: 220675720}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: COINS TXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1305,7 +1305,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 372967442}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: PurchaseTruck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &372967444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2913,6 +2925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1020225086}
   - component: {fileID: 1020225085}
+  - component: {fileID: 1020225087}
   m_Layer: 0
   m_Name: UI Logic
   m_TagString: Untagged
@@ -2932,7 +2945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006d591600474594bbea1b8204378774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsText: {fileID: 712562832}
+  coinsText: {fileID: 220675720}
   vehicleText: {fileID: 1373211576}
 --- !u!4 &1020225086
 Transform:
@@ -2949,6 +2962,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1020225087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020225084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921657e08b3ff5f4a87c7c2bdd008609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1090587392
 GameObject:
   m_ObjectHideFlags: 0
@@ -4359,7 +4384,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1403604635}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: PurchaseRaceCarPro
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1403604637
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4608,7 +4645,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1495693425}
   m_OnClick:
     m_PersistentCalls:
@@ -5292,7 +5329,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1667088288}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: PurchasePurpleCar1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1667088287
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5438,7 +5487,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1677852394}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020225087}
+        m_TargetAssemblyTypeName: BuyingStuffLogic, Assembly-CSharp
+        m_MethodName: PurchaseGreenCar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1677852396
 CanvasRenderer:
   m_ObjectHideFlags: 0
