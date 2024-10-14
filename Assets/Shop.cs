@@ -6,25 +6,29 @@ public class UILogic : MonoBehaviour
 {
     private const string CoinsKey = "Coins";
     private const string VehicleMapKey = "VehicleMap";
-    private const int MaxVehicles = 5; // 5 vehicles (0-4)
+    private const int MaxVehicles = 7; // 7 vehicles (0-6)
 
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI vehicleText;
+    public TextMeshProUGUI levelsBeatenText;
 
     private int _coins;
     private int _carsUnlocked;
+    private int _levelsBeaten;
 
     private void Start()
     {
         InitializePlayerPrefs();
-        UpdateCoinsDisplay();
-        UpdateVehicleDisplay();
-
         _coins = PlayerPrefs.GetInt(CoinsKey);
         _carsUnlocked = PlayerPrefs.GetInt(VehicleMapKey);
+        _levelsBeaten = PlayerPrefs.GetInt("LevelsBeaten");
+
+        UpdateCoinsDisplay();
+        UpdateVehicleDisplay();
+        UpdateLevelsBeatenDisplay();
     }
 
-    //update coins text and vehicle text if changed
+    // Update coins, vehicle, and levels beaten texts if changed
     private void Update()
     {
         if (_coins != PlayerPrefs.GetInt(CoinsKey))
@@ -33,9 +37,17 @@ public class UILogic : MonoBehaviour
             UpdateCoinsDisplay();
         }
 
-        if (_carsUnlocked == PlayerPrefs.GetInt(VehicleMapKey)) return;
-        _carsUnlocked = PlayerPrefs.GetInt(VehicleMapKey);
-        UpdateVehicleDisplay();
+        if (_carsUnlocked != PlayerPrefs.GetInt(VehicleMapKey))
+        {
+            _carsUnlocked = PlayerPrefs.GetInt(VehicleMapKey);
+            UpdateVehicleDisplay();
+        }
+
+        if (_levelsBeaten != PlayerPrefs.GetInt("LevelsBeaten"))
+        {
+            _levelsBeaten = PlayerPrefs.GetInt("LevelsBeaten");
+            UpdateLevelsBeatenDisplay();
+        }
     }
 
     public void GoToFirstLevel()
@@ -61,7 +73,7 @@ public class UILogic : MonoBehaviour
 
     private static void InitializePlayerPrefs()
     {
-        if (!PlayerPrefs.HasKey(CoinsKey) || !PlayerPrefs.HasKey(VehicleMapKey))
+        if (!PlayerPrefs.HasKey(CoinsKey) || !PlayerPrefs.HasKey(VehicleMapKey) || !PlayerPrefs.HasKey("LevelsBeaten"))
         {
             ResetPlayerPrefs();
         }
@@ -71,20 +83,24 @@ public class UILogic : MonoBehaviour
     {
         PlayerPrefs.SetInt(CoinsKey, 0); // Start with 0 coins
         PlayerPrefs.SetInt(VehicleMapKey, 1); // Unlock the first vehicle
+        PlayerPrefs.SetInt("LevelsBeaten", 0); // Start with 0 levels beaten
         PlayerPrefs.Save();
     }
 
     private void UpdateCoinsDisplay()
     {
-        var coins = PlayerPrefs.GetInt(CoinsKey);
-        coinsText.text = coins.ToString();
+        coinsText.text = _coins.ToString();
     }
 
     private void UpdateVehicleDisplay()
     {
-        var vehicles = PlayerPrefs.GetInt(VehicleMapKey);
-        var unlockedVehicleCount = CountUnlockedVehicles(vehicles);
+        var unlockedVehicleCount = CountUnlockedVehicles(_carsUnlocked);
         vehicleText.text = unlockedVehicleCount.ToString();
+    }
+
+    private void UpdateLevelsBeatenDisplay()
+    {
+        levelsBeatenText.text = _levelsBeaten.ToString();
     }
 
     private static int CountUnlockedVehicles(int vehicleMap)
@@ -100,50 +116,42 @@ public class UILogic : MonoBehaviour
         return count;
     }
 
-
     public void AddCoins(int amount)
     {
-        var currentCoins = PlayerPrefs.GetInt(CoinsKey);
-        currentCoins += amount;
-        PlayerPrefs.SetInt(CoinsKey, currentCoins);
+        _coins += amount;
+        PlayerPrefs.SetInt(CoinsKey, _coins);
         PlayerPrefs.Save();
         UpdateCoinsDisplay();
     }
 
     public void RemoveCoins(int amount)
     {
-        var currentCoins = PlayerPrefs.GetInt(CoinsKey);
-        currentCoins -= amount;
-        PlayerPrefs.SetInt(CoinsKey, currentCoins);
+        _coins -= amount;
+        PlayerPrefs.SetInt(CoinsKey, _coins);
         PlayerPrefs.Save();
         UpdateCoinsDisplay();
     }
 
-    // Unlocks a vehicle in the shop (if it's in the valid range)
     public void UnlockVehicle(int vehicleIndex)
     {
-        if (vehicleIndex is < 0 or >= MaxVehicles)
+        if (vehicleIndex < 0 || vehicleIndex >= MaxVehicles)
         {
             Debug.LogWarning("Invalid vehicle index");
             return;
         }
 
-        var vehicleMap = PlayerPrefs.GetInt(VehicleMapKey);
-        vehicleMap |= (1 << vehicleIndex); // Set bit to unlock the vehicle
-        PlayerPrefs.SetInt(VehicleMapKey, vehicleMap);
+        _carsUnlocked |= (1 << vehicleIndex); // Set bit to unlock the vehicle
+        PlayerPrefs.SetInt(VehicleMapKey, _carsUnlocked);
         PlayerPrefs.Save();
+        UpdateVehicleDisplay();
     }
 
-    // Checks if a vehicle is unlocked
     public bool IsVehicleUnlocked(int vehicleIndex)
     {
-        if (vehicleIndex is < 0 or >= MaxVehicles)
-        {
-            Debug.LogWarning("Invalid vehicle index");
-            return false;
-        }
+        if (vehicleIndex is >= 0 and < MaxVehicles)
+            return (_carsUnlocked & (1 << vehicleIndex)) != 0; // Check if the bit is set
+        Debug.LogWarning("Invalid vehicle index");
+        return false;
 
-        var vehicleMap = PlayerPrefs.GetInt(VehicleMapKey);
-        return (vehicleMap & (1 << vehicleIndex)) != 0; // Check if the bit is set
     }
 }
