@@ -32,6 +32,7 @@ public class SwipeFollow2 : MonoBehaviour
 
     private int _coins;
     private int _carsUnlocked;
+    private int _levelsbeaten;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class SwipeFollow2 : MonoBehaviour
         _coins = PlayerPrefs.GetInt("Coins");
         _carsUnlocked = PlayerPrefs.GetInt("VehicleMap");
         coinsText.text = _coins.ToString();
+        _levelsbeaten = PlayerPrefs.GetInt("LevelsBeaten");
     }
 
     private void Update()
@@ -49,7 +51,7 @@ public class SwipeFollow2 : MonoBehaviour
             _coins = PlayerPrefs.GetInt("Coins");
             coinsText.text = _coins.ToString();
         }
-        
+
         if (_gameEnded) return;
         if (!_swiped)
         {
@@ -172,6 +174,8 @@ public class SwipeFollow2 : MonoBehaviour
             case true:
                 _coins += Random.Range(10, 20);
                 PlayerPrefs.SetInt("Coins", _coins);
+                _levelsbeaten++;
+                PlayerPrefs.SetInt("LevelsBeaten", _levelsbeaten);
                 PlayerPrefs.Save();
                 Invoke(nameof(GoToNextLevel), 2.0f);
                 break;

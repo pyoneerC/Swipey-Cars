@@ -31,6 +31,7 @@ public class SwipeFollow : MonoBehaviour
     private bool _gameEnded;
     private int _coins;
     private int _carsUnlocked;
+    private int _levelsbeaten;
 
     private void Start()
     {
@@ -39,6 +40,7 @@ public class SwipeFollow : MonoBehaviour
         _coins = PlayerPrefs.GetInt("Coins");
         _carsUnlocked = PlayerPrefs.GetInt("VehicleMap");
         coinsText.text = _coins.ToString();
+        _levelsbeaten = PlayerPrefs.GetInt("LevelsBeaten");
     }
 
     private void Update()
@@ -171,6 +173,8 @@ public class SwipeFollow : MonoBehaviour
             case true:
                 _coins += UnityEngine.Random.Range(10, 20);
                 PlayerPrefs.SetInt("Coins", _coins);
+                _levelsbeaten++;
+                PlayerPrefs.SetInt("LevelsBeaten", _levelsbeaten);
                 PlayerPrefs.Save();
                 Invoke(nameof(GoToNextLevel), 2.0f);
                 break;
