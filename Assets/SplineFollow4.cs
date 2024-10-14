@@ -13,6 +13,9 @@ public class SwipeFollow4 : MonoBehaviour
     public GameObject pauseButton;
     public Texture2D pauseButtonImageA;
     public Texture2D pauseButtonImageB;
+    public GameObject muteButton;
+    public Texture2D muteButtonImageA;
+    public Texture2D muteButtonImageB;
 
     public Transform carTransform; // The car object
     public SplineContainer spline; // Your spline path, assuming you have a spline component
@@ -220,6 +223,15 @@ public class SwipeFollow4 : MonoBehaviour
         var rawImage = pauseButton.GetComponent<RawImage>();
 
         rawImage.texture = Time.timeScale == 0 ? pauseButtonImageB : pauseButtonImageA;
+    }
+
+    public void ToggleMute()
+    {
+        Camera.main.GetComponent<AudioListener>().enabled = !Camera.main.GetComponent<AudioListener>().enabled;
+
+        var rawImage = muteButton.GetComponent<RawImage>();
+
+        rawImage.texture = Camera.main.GetComponent<AudioListener>().enabled ? muteButtonImageA : muteButtonImageB;
     }
 
 }
