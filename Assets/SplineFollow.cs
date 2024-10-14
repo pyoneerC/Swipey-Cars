@@ -191,7 +191,7 @@ public class SwipeFollow : MonoBehaviour
 
     public void RedirectToShop()
     {
-        SceneManager.LoadScene("Shop");
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void TogglePause()

@@ -20,7 +20,8 @@ public class UILogic : MonoBehaviour
 
     public void GoToFirstLevel()
     {
-        SceneManager.LoadScene("LVL1");
+        var randomLevel = Random.Range(1, 5);
+        SceneManager.LoadScene($"LVL{randomLevel}");
     }
 
     public void GoToShop()
