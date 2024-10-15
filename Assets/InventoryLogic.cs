@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;  // Import TextMeshPro namespace
+using TMPro;
 
 public class InventoryLogic : MonoBehaviour
 {
@@ -12,11 +11,14 @@ public class InventoryLogic : MonoBehaviour
     public GameObject RedRaceCar;
     public GameObject WhiteRaceCar;
 
-    public GameObject RedRaceCarText;  // Keep as GameObject
-    public GameObject WhiteRaceCarText;  // Keep as GameObject
+    public GameObject RedRaceCarText;
+    public GameObject WhiteRaceCarText;
 
     public Texture2D icon_cross;
     public Texture2D icon_checkmark;
+    public Texture2D icon_green_circle;  // Icon for active car
+
+    private GameObject activeCar = null;  // Reference to the currently active car
 
     private void Start()
     {
@@ -25,16 +27,16 @@ public class InventoryLogic : MonoBehaviour
 
     private void UpdateInventory()
     {
-        UpdateCarVisual(PurpleCarGameobjectVisual, CarType.PurpleCar1);
-        UpdateCarVisual(Truck, CarType.Truck);
-        UpdateCarVisual(GreenCar, CarType.GreenCar);
-        UpdateCarVisual(RaceCarPro, CarType.RaceCarPro);
+        UpdateCarVisual(PurpleCarGameobjectVisual, BuyingStuffLogic.CarType.PurpleCar1);
+        UpdateCarVisual(Truck, BuyingStuffLogic.CarType.Truck);
+        UpdateCarVisual(GreenCar, BuyingStuffLogic.CarType.GreenCar);
+        UpdateCarVisual(RaceCarPro, BuyingStuffLogic.CarType.RaceCarPro);
 
         UpdateLevelBasedCar(RedRaceCar, 20, RedRaceCarText);
         UpdateLevelBasedCar(WhiteRaceCar, 50, WhiteRaceCarText);
     }
 
-    private void UpdateCarVisual(GameObject carGameObject, CarType carType)
+    private void UpdateCarVisual(GameObject carGameObject, BuyingStuffLogic.CarType carType)
     {
         bool isOwned = CheckIfCarOwned(carType);
         RawImage carIcon = carGameObject.GetComponentInChildren<RawImage>();
@@ -57,7 +59,6 @@ public class InventoryLogic : MonoBehaviour
             carIcon.texture = icon_cross;
         }
 
-        // Get the TextMeshProUGUI component from the GameObject
         TextMeshProUGUI levelText = levelTextObject.GetComponent<TextMeshProUGUI>();
         remainingLevels = Mathf.Max(0, remainingLevels);
         levelText.text = remainingLevels.ToString();
@@ -71,18 +72,36 @@ public class InventoryLogic : MonoBehaviour
         return Color.Lerp(Color.green, Color.red, ratio);
     }
 
-    private bool CheckIfCarOwned(CarType carType)
+    private bool CheckIfCarOwned(BuyingStuffLogic.CarType carType)
     {
         int carsUnlocked = PlayerPrefs.GetInt("VehicleMap", 1);
         return (carsUnlocked & (1 << (int)carType)) != 0;
     }
 
-    public enum CarType
+    // Callback method for selecting a car
+    private void SelectCar(GameObject carGameObject, BuyingStuffLogic.CarType carType)
     {
-        StartingCar,
-        PurpleCar1,
-        Truck,
-        GreenCar,
-        RaceCarPro
+        if (CheckIfCarOwned(carType))
+        {
+            if (activeCar != null)
+            {
+                // Reset the previously active car icon back to checkmark
+                RawImage prevCarIcon = activeCar.GetComponentInChildren<RawImage>();
+                prevCarIcon.texture = icon_checkmark;
+            }
+
+            // Set the new active car and update its icon to the green circle
+            activeCar = carGameObject;
+            RawImage carIcon = activeCar.GetComponentInChildren<RawImage>();
+            carIcon.texture = icon_green_circle;
+        }
     }
+
+    // Callback methods for each car
+    public void OnPurpleCarSelected() => SelectCar(PurpleCarGameobjectVisual, BuyingStuffLogic.CarType.PurpleCar1);
+    public void OnTruckSelected() => SelectCar(Truck, BuyingStuffLogic.CarType.Truck);
+    public void OnGreenCarSelected() => SelectCar(GreenCar, BuyingStuffLogic.CarType.GreenCar);
+    public void OnRaceCarProSelected() => SelectCar(RaceCarPro, BuyingStuffLogic.CarType.RaceCarPro);
+    public void OnRedRaceCarSelected() => SelectCar(RedRaceCar, BuyingStuffLogic.CarType.StartingCar); // Assuming RedRaceCar is StartingCar
+    public void OnWhiteRaceCarSelected() => SelectCar(WhiteRaceCar, BuyingStuffLogic.CarType.StartingCar); // Adjust CarType if needed
 }
