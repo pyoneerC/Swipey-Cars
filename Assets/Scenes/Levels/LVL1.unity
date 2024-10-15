@@ -4613,17 +4613,17 @@ MonoBehaviour:
       TangentIn:
         x: 0
         y: 0
-        z: -1.0309021
+        z: -1.084661
       TangentOut:
         x: 0
         y: 0
-        z: 1.0309021
+        z: 1.084661
       Rotation:
         value:
           x: 0
-          y: -0.16018231
+          y: -0.16018228
           z: -0
-          w: 0.9870874
+          w: 0.9870875
     m_MetaData:
     - Mode: 2
       Tension: 0.5
