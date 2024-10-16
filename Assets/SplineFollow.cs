@@ -36,6 +36,13 @@ public class SwipeFollow : MonoBehaviour
     private int _carsUnlocked;
     private int _levelsbeaten;
 
+    public Prefab DefaultCarPrefab;
+    public Prefab TruckPrefab;
+    public Prefab GreenCarPrefab;
+    public Prefab RaceCarProPrefab;
+    public Prefab RedRaceCarPrefab;
+    public Prefab PurpleCarPrefab;
+
     private void Start()
     {
         Time.timeScale = 1;
