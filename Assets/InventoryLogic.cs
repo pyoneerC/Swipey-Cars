@@ -102,6 +102,8 @@ public class InventoryLogic : MonoBehaviour
         activeCar = carGameObject;
         RawImage carIcon = activeCar.GetComponentInChildren<RawImage>();
         carIcon.texture = icon_green_circle;
+        PlayerPrefs.SetInt("SelectedVehicle", (int)carType);
+        PlayerPrefs.Save();
         CarSelectionFeedbackSource.PlayOneShot(CarSelectionFeedbackClipSuccess);
     }
 
