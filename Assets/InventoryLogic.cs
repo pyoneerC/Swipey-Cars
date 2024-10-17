@@ -18,6 +18,10 @@ public class InventoryLogic : MonoBehaviour
     public Texture2D icon_checkmark;
     public Texture2D icon_green_circle;  // Icon for active car
 
+    public AudioSource CarSelectionFeedbackSource;
+    public AudioClip CarSelectionFeedbackClipError;
+    public AudioClip CarSelectionFeedbackClipSuccess;
+
     private GameObject activeCar = null;  // Reference to the currently active car
 
     private void Start()
@@ -81,20 +85,24 @@ public class InventoryLogic : MonoBehaviour
     // Callback method for selecting a car
     private void SelectCar(GameObject carGameObject, BuyingStuffLogic.CarType carType)
     {
-        if (CheckIfCarOwned(carType))
+        if (!CheckIfCarOwned(carType))
         {
-            if (activeCar != null)
-            {
-                // Reset the previously active car icon back to checkmark
-                RawImage prevCarIcon = activeCar.GetComponentInChildren<RawImage>();
-                prevCarIcon.texture = icon_checkmark;
-            }
-
-            // Set the new active car and update its icon to the green circle
-            activeCar = carGameObject;
-            RawImage carIcon = activeCar.GetComponentInChildren<RawImage>();
-            carIcon.texture = icon_green_circle;
+            CarSelectionFeedbackSource.PlayOneShot(CarSelectionFeedbackClipError);
+            return;
         }
+        
+        if (activeCar != null)
+        {
+            // Reset the previously active car icon back to checkmark
+            RawImage prevCarIcon = activeCar.GetComponentInChildren<RawImage>();
+            prevCarIcon.texture = icon_checkmark;
+        }
+
+        // Set the new active car and update its icon to the green circle
+        activeCar = carGameObject;
+        RawImage carIcon = activeCar.GetComponentInChildren<RawImage>();
+        carIcon.texture = icon_green_circle;
+        CarSelectionFeedbackSource.PlayOneShot(CarSelectionFeedbackClipSuccess);
     }
 
     // Callback methods for each car
