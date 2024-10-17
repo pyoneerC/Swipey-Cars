@@ -90,7 +90,7 @@ public class InventoryLogic : MonoBehaviour
             CarSelectionFeedbackSource.PlayOneShot(CarSelectionFeedbackClipError);
             return;
         }
-        
+
         if (activeCar != null)
         {
             // Reset the previously active car icon back to checkmark

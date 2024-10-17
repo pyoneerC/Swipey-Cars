@@ -5,6 +5,9 @@ using UnityEngine;
 public class BuyingStuffLogic : MonoBehaviour
 {
     public TextMeshProUGUI statusText;
+    public AudioSource PurchaseFeedbackSource;
+    public AudioClip PurchaseFeedbackClipSuccess;
+    public AudioClip PurchaseFeedbackClipError;
 
     private int _coins;
     private int _carsUnlocked;
@@ -42,17 +45,20 @@ public class BuyingStuffLogic : MonoBehaviour
         _coins += amount;
         SavePlayerData(_coins, _carsUnlocked);
         UpdateStatusText($"Added {amount} coins!", Color.green);
+        PurchaseFeedbackSource.PlayOneShot(PurchaseFeedbackClipSuccess);
     }
 
     private int GenerateRandomBoxAmount()
     {
         float randomValue = Random.Range(0f, 1f);
-        if (randomValue < 0.6f)
-            return Random.Range(5, 15);
-        else if (randomValue < 0.9f)
-            return Random.Range(15, 50);
-        else
-            return Random.Range(50, 101);
+        PurchaseFeedbackSource.PlayOneShot(PurchaseFeedbackClipSuccess);
+        
+        return randomValue switch
+        {
+            < 0.6f => Random.Range(5, 15),
+            < 0.9f => Random.Range(15, 50),
+            _ => Random.Range(50, 101)
+        };
     }
 
     public void PurchasePurpleCar1()
@@ -85,18 +91,22 @@ public class BuyingStuffLogic : MonoBehaviour
         if (IsCarOwned(carType))
         {
             UpdateStatusText($"You already own the {carType}.", Color.red);
+            PurchaseFeedbackSource.PlayOneShot(PurchaseFeedbackClipError);
             return;
         }
 
         if (_coins < carPrice)
         {
             UpdateStatusText($"Not enough coins to purchase the {carType}.", Color.red);
+            PurchaseFeedbackSource.PlayOneShot(PurchaseFeedbackClipError);
             return;
         }
 
         _coins -= carPrice;
         _carsUnlocked |= (1 << (int)carType);
         SavePlayerData(_coins, _carsUnlocked);
+
+        PurchaseFeedbackSource.PlayOneShot(PurchaseFeedbackClipSuccess);
 
         UpdateStatusText($"Purchased {carType} successfully!", Color.green);
     }
