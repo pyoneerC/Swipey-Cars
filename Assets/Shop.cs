@@ -15,6 +15,7 @@ public class UILogic : MonoBehaviour
     private int _coins;
     private int _carsUnlocked;
     private int _levelsBeaten;
+    private int _selectedVehicle;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class UILogic : MonoBehaviour
         _coins = PlayerPrefs.GetInt(CoinsKey);
         _carsUnlocked = PlayerPrefs.GetInt(VehicleMapKey);
         _levelsBeaten = PlayerPrefs.GetInt("LevelsBeaten");
+        _selectedVehicle = PlayerPrefs.GetInt("SelectedVehicle");
 
         UpdateCoinsDisplay();
         UpdateVehicleDisplay();
@@ -43,11 +45,9 @@ public class UILogic : MonoBehaviour
             UpdateVehicleDisplay();
         }
 
-        if (_levelsBeaten != PlayerPrefs.GetInt("LevelsBeaten"))
-        {
-            _levelsBeaten = PlayerPrefs.GetInt("LevelsBeaten");
-            UpdateLevelsBeatenDisplay();
-        }
+        if (_levelsBeaten == PlayerPrefs.GetInt("LevelsBeaten")) return;
+        _levelsBeaten = PlayerPrefs.GetInt("LevelsBeaten");
+        UpdateLevelsBeatenDisplay();
     }
 
     public void GoToFirstLevel()
@@ -73,7 +73,7 @@ public class UILogic : MonoBehaviour
 
     private static void InitializePlayerPrefs()
     {
-        if (!PlayerPrefs.HasKey(CoinsKey) || !PlayerPrefs.HasKey(VehicleMapKey) || !PlayerPrefs.HasKey("LevelsBeaten"))
+        if (!PlayerPrefs.HasKey(CoinsKey) || !PlayerPrefs.HasKey(VehicleMapKey) || !PlayerPrefs.HasKey("LevelsBeaten") || !PlayerPrefs.HasKey("SelectedVehicle"))
         {
             ResetPlayerPrefs();
         }
@@ -84,6 +84,7 @@ public class UILogic : MonoBehaviour
         PlayerPrefs.SetInt(CoinsKey, 0); // Start with 0 coins
         PlayerPrefs.SetInt(VehicleMapKey, 1); // Unlock the first vehicle
         PlayerPrefs.SetInt("LevelsBeaten", 0); // Start with 0 levels beaten
+        PlayerPrefs.SetInt("SelectedVehicle", 0); // Select the first vehicle
         PlayerPrefs.Save();
     }
 

@@ -25,9 +25,6 @@ public class BuyingStuffLogic : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetInt("Coins", 10000);
-        PlayerPrefs.SetInt("VehicleMap", 1);
-        PlayerPrefs.Save();
         _coins = PlayerPrefs.GetInt("Coins");
         _carsUnlocked = PlayerPrefs.GetInt("VehicleMap");
     }
