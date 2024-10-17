@@ -97,11 +97,6 @@ public class InventoryLogic : MonoBehaviour
         }
     }
 
-    public void RandomLog()
-    {
-        Debug.Log("Random log");
-    }
-
     // Callback methods for each car
     public void OnPurpleCarSelected() => SelectCar(PurpleCarGameobjectVisual, BuyingStuffLogic.CarType.PurpleCar1);
     public void OnTruckSelected() => SelectCar(Truck, BuyingStuffLogic.CarType.Truck);

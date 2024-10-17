@@ -279,7 +279,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1645954621}
         m_TargetAssemblyTypeName: InventoryLogic, Assembly-CSharp
-        m_MethodName: RandomLog
+        m_MethodName: OnTruckSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -968,7 +968,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1645954621}
         m_TargetAssemblyTypeName: InventoryLogic, Assembly-CSharp
-        m_MethodName: RandomLog
+        m_MethodName: OnGreenCarSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2092,7 +2092,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1645954621}
         m_TargetAssemblyTypeName: InventoryLogic, Assembly-CSharp
-        m_MethodName: RandomLog
+        m_MethodName: OnRaceCarProSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2296,7 +2296,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1645954621}
         m_TargetAssemblyTypeName: InventoryLogic, Assembly-CSharp
-        m_MethodName: RandomLog
+        m_MethodName: OnRedRaceCarSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3591,7 +3591,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1645954621}
         m_TargetAssemblyTypeName: InventoryLogic, Assembly-CSharp
-        m_MethodName: RandomLog
+        m_MethodName: OnPurpleCarSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4059,7 +4059,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1645954621}
         m_TargetAssemblyTypeName: InventoryLogic, Assembly-CSharp
-        m_MethodName: RandomLog
+        m_MethodName: OnWhiteRaceCarSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
