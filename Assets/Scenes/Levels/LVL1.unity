@@ -4542,8 +4542,10 @@ MonoBehaviour:
   carPrefabs:
   - {fileID: 885723816}
   - {fileID: 1468259659}
-  - {fileID: 1468259659}
-  - {fileID: 1468259659}
+  - {fileID: 156459839}
+  - {fileID: 769697895}
+  - {fileID: 1273181319}
+  - {fileID: 446943215}
 --- !u!4 &885723820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9b31917958f1c4449b2ad1a15cb9d325,

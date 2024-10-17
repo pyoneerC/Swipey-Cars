@@ -59,7 +59,9 @@ public class SwipeFollow : MonoBehaviour
     private void InitializeCarSelection()
     {
         // Get the selected car index from PlayerPrefs
-        int selectedCarIndex = PlayerPrefs.GetInt("SelectedCar", 0); // Default to 0 (default car)
+        int selectedCarIndex = PlayerPrefs.GetInt("SelectedVehicle");
+        //clamp from 0 to carPrefabs.Length
+        selectedCarIndex = Mathf.Clamp(selectedCarIndex, 0, carPrefabs.Length - 1);
 
         // Disable all cars first
         foreach (var carPrefab in carPrefabs)
