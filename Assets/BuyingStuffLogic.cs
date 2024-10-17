@@ -52,7 +52,7 @@ public class BuyingStuffLogic : MonoBehaviour
     {
         float randomValue = Random.Range(0f, 1f);
         PurchaseFeedbackSource.PlayOneShot(PurchaseFeedbackClipSuccess);
-        
+
         return randomValue switch
         {
             < 0.6f => Random.Range(5, 15),

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,6 +23,10 @@ public class SwipeFollow : MonoBehaviour
     public Transform carTransform; // The car object
     public SplineContainer spline; // Your spline path
     public TextMeshProUGUI coinsText;
+    public AudioSource swipeFeedbackSource;
+    public AudioClip engineSoundStart;
+    public AudioClip successSound;
+    public AudioClip failSound;
 
     // Reference to all car prefabs
     public GameObject[] carPrefabs; // Array to hold car prefabs
@@ -102,6 +108,7 @@ public class SwipeFollow : MonoBehaviour
                 break;
             case TouchPhase.Ended:
                 _swipeEnd = touch.position;
+                PlayEngineSound();
                 CalculateSwipeForce();
                 break;
             case TouchPhase.Moved:
@@ -113,6 +120,24 @@ public class SwipeFollow : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    private IEnumerator PlayEngineSoundForDuration(AudioSource swipeFeedbackSource, AudioClip engineSoundStart, float duration)
+    {
+        // Play the sound
+        swipeFeedbackSource.PlayOneShot(engineSoundStart);
+
+        // Wait for the specified duration
+        yield return new WaitForSeconds(duration);
+
+        // Stop the sound after the duration (if still playing)
+        swipeFeedbackSource.Stop();
+    }
+
+// Call this method to play the sound for 5 seconds
+    private void PlayEngineSound()
+    {
+        StartCoroutine(PlayEngineSoundForDuration(swipeFeedbackSource, engineSoundStart, 3.5f));
     }
 
     private void CalculateSwipeForce()
@@ -212,6 +237,8 @@ public class SwipeFollow : MonoBehaviour
                 Invoke(nameof(GoToNextLevel), 2.0f);
                 break;
         }
+
+        swipeFeedbackSource.PlayOneShot(success ? successSound : failSound);
     }
 
     public void GoToNextLevel()
