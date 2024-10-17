@@ -657,6 +657,7 @@ MonoBehaviour:
   carTransform: {fileID: 156459838}
   spline: {fileID: 937863233}
   coinsText: {fileID: 657354752}
+  carPrefabs: []
 --- !u!4 &160342294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b4f5802a456f55448ae35fedd7a1548f,
@@ -1927,6 +1928,7 @@ MonoBehaviour:
   carTransform: {fileID: 446943214}
   spline: {fileID: 937863233}
   coinsText: {fileID: 657354752}
+  carPrefabs: []
 --- !u!4 &462623820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5bfc9a2185d655b4bbf73ddf0c3d4f88,
@@ -3768,7 +3770,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 606fcb4cb14926944bfb591862ab4260,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3819,6 +3821,7 @@ MonoBehaviour:
   carTransform: {fileID: 769697894}
   spline: {fileID: 937863233}
   coinsText: {fileID: 657354752}
+  carPrefabs: []
 --- !u!4 &794670989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d31c71bb4135834cb44c0fc8fa19a74,
@@ -4471,7 +4474,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9b31917958f1c4449b2ad1a15cb9d325,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4516,6 +4519,11 @@ MonoBehaviour:
   carTransform: {fileID: 885723820}
   spline: {fileID: 937863233}
   coinsText: {fileID: 657354752}
+  carPrefabs:
+  - {fileID: 885723816}
+  - {fileID: 1468259659}
+  - {fileID: 1468259659}
+  - {fileID: 1468259659}
 --- !u!4 &885723820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9b31917958f1c4449b2ad1a15cb9d325,
@@ -6721,6 +6729,7 @@ MonoBehaviour:
   carTransform: {fileID: 1273181318}
   spline: {fileID: 937863233}
   coinsText: {fileID: 657354752}
+  carPrefabs: []
 --- !u!4 &1289330714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 533d4e568a10b5849b21fa46c4a8263c,
@@ -7644,6 +7653,7 @@ MonoBehaviour:
   carTransform: {fileID: 1468259658}
   spline: {fileID: 937863233}
   coinsText: {fileID: 657354752}
+  carPrefabs: []
 --- !u!4 &1477174608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 96fc1068f38d72c448c7182f501dcfb4,

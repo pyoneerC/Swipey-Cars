@@ -19,12 +19,14 @@ public class SwipeFollow : MonoBehaviour
     public Texture2D muteButtonImageB;
 
     public Transform carTransform; // The car object
-    public SplineContainer spline; // Your spline path, assuming you have a spline component
+    public SplineContainer spline; // Your spline path
     public TextMeshProUGUI coinsText;
+
+    // Reference to all car prefabs
+    public GameObject[] carPrefabs; // Array to hold car prefabs
 
     private int _swipeForce;
     private bool _swiped;
-
     private Vector2 _swipeStart;
     private Vector2 _swipeEnd;
     private bool _swipeDetected = false;
@@ -36,13 +38,6 @@ public class SwipeFollow : MonoBehaviour
     private int _carsUnlocked;
     private int _levelsbeaten;
 
-    public Prefab DefaultCarPrefab;
-    public Prefab TruckPrefab;
-    public Prefab GreenCarPrefab;
-    public Prefab RaceCarProPrefab;
-    public Prefab RedRaceCarPrefab;
-    public Prefab PurpleCarPrefab;
-
     private void Start()
     {
         Time.timeScale = 1;
@@ -51,6 +46,34 @@ public class SwipeFollow : MonoBehaviour
         _carsUnlocked = PlayerPrefs.GetInt("VehicleMap");
         coinsText.text = _coins.ToString();
         _levelsbeaten = PlayerPrefs.GetInt("LevelsBeaten");
+
+        InitializeCarSelection(); // Initialize the car selection
+    }
+
+    private void InitializeCarSelection()
+    {
+        // Get the selected car index from PlayerPrefs
+        int selectedCarIndex = PlayerPrefs.GetInt("SelectedCar", 0); // Default to 0 (default car)
+
+        // Disable all cars first
+        foreach (var carPrefab in carPrefabs)
+        {
+            carPrefab.SetActive(false);
+        }
+
+        // Check if selected index is valid
+        if (selectedCarIndex >= 0 && selectedCarIndex < carPrefabs.Length)
+        {
+            // Enable the selected car
+            carPrefabs[selectedCarIndex].SetActive(true);
+            carTransform = carPrefabs[selectedCarIndex].transform; // Assign the transform
+        }
+        else
+        {
+            Debug.LogWarning("Selected car index is out of range: " + selectedCarIndex);
+            carPrefabs[0].SetActive(true); // Fallback to default car
+            carTransform = carPrefabs[0].transform;
+        }
     }
 
     private void Update()
@@ -240,5 +263,4 @@ public class SwipeFollow : MonoBehaviour
 
         rawImage.texture = Camera.main.GetComponent<AudioListener>().enabled ? muteButtonImageA : muteButtonImageB;
     }
-
 }
