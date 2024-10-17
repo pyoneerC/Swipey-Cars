@@ -3250,7 +3250,7 @@ MonoBehaviour:
   WhiteRaceCarText: {fileID: 1996361169}
   icon_cross: {fileID: 2800000, guid: 2b6c16345dc3af147b7c7f8bb742ed5d, type: 3}
   icon_checkmark: {fileID: 2800000, guid: 6b972858ee0b24149974d57fb05fefe7, type: 3}
-  icon_green_circle: {fileID: 0}
+  icon_green_circle: {fileID: 2800000, guid: fa4a79bd1e5d6aa45bf489e987079b20, type: 3}
 --- !u!1 &1704970771
 GameObject:
   m_ObjectHideFlags: 0
