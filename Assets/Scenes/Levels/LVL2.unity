@@ -1148,7 +1148,13 @@ MonoBehaviour:
   engineSoundStart: {fileID: 8300000, guid: cd8fae8fe1baff64ca7d76e053b2e046, type: 3}
   successSound: {fileID: 8300000, guid: 73fe5803633408f49b2b72dcc86673d2, type: 3}
   failSound: {fileID: 8300000, guid: 8c0de88ccd3ff90478cbb6b0e5be882a, type: 3}
-  carPrefabs: []
+  carPrefabs:
+  - {fileID: 885723816}
+  - {fileID: 1753261489}
+  - {fileID: 1095732296}
+  - {fileID: 225535172}
+  - {fileID: 970422997}
+  - {fileID: 1520332569}
 --- !u!82 &225535174
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3318,7 +3324,13 @@ MonoBehaviour:
   engineSoundStart: {fileID: 8300000, guid: cd8fae8fe1baff64ca7d76e053b2e046, type: 3}
   successSound: {fileID: 8300000, guid: 73fe5803633408f49b2b72dcc86673d2, type: 3}
   failSound: {fileID: 8300000, guid: 8c0de88ccd3ff90478cbb6b0e5be882a, type: 3}
-  carPrefabs: []
+  carPrefabs:
+  - {fileID: 885723816}
+  - {fileID: 1753261489}
+  - {fileID: 1095732296}
+  - {fileID: 225535172}
+  - {fileID: 970422997}
+  - {fileID: 1520332569}
 --- !u!82 &885723822
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3910,7 +3922,13 @@ MonoBehaviour:
   engineSoundStart: {fileID: 8300000, guid: cd8fae8fe1baff64ca7d76e053b2e046, type: 3}
   successSound: {fileID: 8300000, guid: 73fe5803633408f49b2b72dcc86673d2, type: 3}
   failSound: {fileID: 8300000, guid: 8c0de88ccd3ff90478cbb6b0e5be882a, type: 3}
-  carPrefabs: []
+  carPrefabs:
+  - {fileID: 885723816}
+  - {fileID: 1753261489}
+  - {fileID: 1095732296}
+  - {fileID: 225535172}
+  - {fileID: 970422997}
+  - {fileID: 1520332569}
 --- !u!82 &970422999
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4378,7 +4396,13 @@ MonoBehaviour:
   engineSoundStart: {fileID: 8300000, guid: cd8fae8fe1baff64ca7d76e053b2e046, type: 3}
   successSound: {fileID: 8300000, guid: 73fe5803633408f49b2b72dcc86673d2, type: 3}
   failSound: {fileID: 8300000, guid: 8c0de88ccd3ff90478cbb6b0e5be882a, type: 3}
-  carPrefabs: []
+  carPrefabs:
+  - {fileID: 885723816}
+  - {fileID: 1753261489}
+  - {fileID: 1095732296}
+  - {fileID: 225535172}
+  - {fileID: 970422997}
+  - {fileID: 1520332569}
 --- !u!82 &1095732298
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6559,7 +6583,13 @@ MonoBehaviour:
   engineSoundStart: {fileID: 8300000, guid: cd8fae8fe1baff64ca7d76e053b2e046, type: 3}
   successSound: {fileID: 8300000, guid: 73fe5803633408f49b2b72dcc86673d2, type: 3}
   failSound: {fileID: 8300000, guid: 8c0de88ccd3ff90478cbb6b0e5be882a, type: 3}
-  carPrefabs: []
+  carPrefabs:
+  - {fileID: 885723816}
+  - {fileID: 1753261489}
+  - {fileID: 1095732296}
+  - {fileID: 225535172}
+  - {fileID: 970422997}
+  - {fileID: 1520332569}
 --- !u!82 &1520332571
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7263,7 +7293,13 @@ MonoBehaviour:
   engineSoundStart: {fileID: 8300000, guid: cd8fae8fe1baff64ca7d76e053b2e046, type: 3}
   successSound: {fileID: 8300000, guid: 73fe5803633408f49b2b72dcc86673d2, type: 3}
   failSound: {fileID: 8300000, guid: 8c0de88ccd3ff90478cbb6b0e5be882a, type: 3}
-  carPrefabs: []
+  carPrefabs:
+  - {fileID: 885723816}
+  - {fileID: 1753261489}
+  - {fileID: 1095732296}
+  - {fileID: 225535172}
+  - {fileID: 970422997}
+  - {fileID: 1520332569}
 --- !u!82 &1753261491
 AudioSource:
   m_ObjectHideFlags: 0
