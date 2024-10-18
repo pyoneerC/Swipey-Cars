@@ -236,7 +236,7 @@ public class SwipeFollow3 : MonoBehaviour
                 _levelsbeaten++;
                 PlayerPrefs.SetInt("LevelsBeaten", _levelsbeaten);
                 PlayerPrefs.Save();
-                Invoke(nameof(GoToNextLevel), 2.0f);
+                Invoke(nameof(GoToNextLevel), 20.0f);
                 break;
         }
 

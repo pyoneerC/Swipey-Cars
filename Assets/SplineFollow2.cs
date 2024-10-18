@@ -266,7 +266,7 @@ public class SwipeFollow2 : MonoBehaviour
         swipeForceText.text = "";
         FindObjectOfType<RewardedAdsButton>().ShowAd();
 
-        Invoke(nameof(RestartLevel), 2.0f);
+        Invoke(nameof(RestartLevel), 20.0f);
     }
 
     public void RestartLevel()
