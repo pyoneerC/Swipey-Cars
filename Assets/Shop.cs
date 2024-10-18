@@ -25,7 +25,7 @@ public class UILogic : MonoBehaviour
         _levelsBeaten = PlayerPrefs.GetInt("LevelsBeaten");
         _selectedVehicle = PlayerPrefs.GetInt("SelectedVehicle");
 
-        ResetPlayerPrefs();
+        // ResetPlayerPrefs();
 
         UpdateCoinsDisplay();
         UpdateVehicleDisplay();
