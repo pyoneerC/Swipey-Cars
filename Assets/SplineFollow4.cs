@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 using UnityEngine.UI;
@@ -18,12 +21,18 @@ public class SwipeFollow4 : MonoBehaviour
     public Texture2D muteButtonImageB;
 
     public Transform carTransform; // The car object
-    public SplineContainer spline; // Your spline path, assuming you have a spline component
+    public SplineContainer spline; // Your spline path
     public TextMeshProUGUI coinsText;
+    public AudioSource swipeFeedbackSource;
+    public AudioClip engineSoundStart;
+    public AudioClip successSound;
+    public AudioClip failSound;
+
+    // Reference to all car prefabs
+    public GameObject[] carPrefabs; // Array to hold car prefabs
 
     private int _swipeForce;
     private bool _swiped;
-
     private Vector2 _swipeStart;
     private Vector2 _swipeEnd;
     private bool _swipeDetected = false;
@@ -31,7 +40,6 @@ public class SwipeFollow4 : MonoBehaviour
     private const int WinThresholdMin = 1;
     private const int WinThresholdMax = 1;
     private bool _gameEnded;
-
     private int _coins;
     private int _carsUnlocked;
     private int _levelsbeaten;
@@ -44,6 +52,36 @@ public class SwipeFollow4 : MonoBehaviour
         _carsUnlocked = PlayerPrefs.GetInt("VehicleMap");
         coinsText.text = _coins.ToString();
         _levelsbeaten = PlayerPrefs.GetInt("LevelsBeaten");
+
+        InitializeCarSelection(); // Initialize the car selection
+    }
+
+    private void InitializeCarSelection()
+    {
+        // Get the selected car index from PlayerPrefs
+        int selectedCarIndex = PlayerPrefs.GetInt("SelectedVehicle");
+        //clamp from 0 to carPrefabs.Length
+        selectedCarIndex = Mathf.Clamp(selectedCarIndex, 0, carPrefabs.Length - 1);
+
+        // Disable all cars first
+        foreach (var carPrefab in carPrefabs)
+        {
+            carPrefab.SetActive(false);
+        }
+
+        // Check if selected index is valid
+        if (selectedCarIndex >= 0 && selectedCarIndex < carPrefabs.Length)
+        {
+            // Enable the selected car
+            carPrefabs[selectedCarIndex].SetActive(true);
+            carTransform = carPrefabs[selectedCarIndex].transform; // Assign the transform
+        }
+        else
+        {
+            Debug.LogWarning("Selected car index is out of range: " + selectedCarIndex);
+            carPrefabs[0].SetActive(true); // Fallback to default car
+            carTransform = carPrefabs[0].transform;
+        }
     }
 
     private void Update()
@@ -63,7 +101,7 @@ public class SwipeFollow4 : MonoBehaviour
 
     private void DetectSwipe()
     {
-        if (Input.touchCount <= 0) return;
+        if (Input.touchCount <= 0 || EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return;
         var touch = Input.GetTouch(0);
         switch (touch.phase)
         {
@@ -72,6 +110,7 @@ public class SwipeFollow4 : MonoBehaviour
                 break;
             case TouchPhase.Ended:
                 _swipeEnd = touch.position;
+                PlayEngineSound();
                 CalculateSwipeForce();
                 break;
             case TouchPhase.Moved:
@@ -83,6 +122,24 @@ public class SwipeFollow4 : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    private IEnumerator PlayEngineSoundForDuration(AudioSource swipeFeedbackSource, AudioClip engineSoundStart, float duration)
+    {
+        // Play the sound
+        swipeFeedbackSource.PlayOneShot(engineSoundStart);
+
+        // Wait for the specified duration
+        yield return new WaitForSeconds(duration);
+
+        // Stop the sound after the duration (if still playing)
+        swipeFeedbackSource.Stop();
+    }
+
+// Call this method to play the sound for 5 seconds
+    private void PlayEngineSound()
+    {
+        StartCoroutine(PlayEngineSoundForDuration(swipeFeedbackSource, engineSoundStart, 3.5f));
     }
 
     private void CalculateSwipeForce()
@@ -182,6 +239,8 @@ public class SwipeFollow4 : MonoBehaviour
                 Invoke(nameof(GoToNextLevel), 2.0f);
                 break;
         }
+
+        swipeFeedbackSource.PlayOneShot(success ? successSound : failSound);
     }
 
     public void GoToNextLevel()
@@ -233,5 +292,4 @@ public class SwipeFollow4 : MonoBehaviour
 
         rawImage.texture = Camera.main.GetComponent<AudioListener>().enabled ? muteButtonImageA : muteButtonImageB;
     }
-
 }
